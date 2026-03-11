@@ -22,18 +22,36 @@ export class UserTypeOrmRepository implements IUserRepository {
     return row ? this.toDomain(row) : null;
   }
 
+  async findByUsername(username: string): Promise<User | null> {
+    const row = await this.repo.findOne({
+      where: { username: username.toLowerCase() },
+    });
+    return row ? this.toDomain(row) : null;
+  }
+
   async save(user: User): Promise<User> {
     const row = this.repo.create({
       id: user.id,
+      username: user.username.toLowerCase(),
       email: user.email,
-      name: user.name,
       roleId: user.roleId,
+      password: user.password,
     });
     await this.repo.save(row);
     return user;
   }
 
+  async delete(id: string): Promise<void> {
+    await this.repo.delete(id);
+  }
+
   private toDomain(row: UserTypeOrmEntity): User {
-    return new User(row.id, row.email, row.name, row.roleId);
+    return new User(
+      row.id,
+      row.username,
+      row.email,
+      row.roleId,
+      row.password,
+    );
   }
 }

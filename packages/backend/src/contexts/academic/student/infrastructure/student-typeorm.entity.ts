@@ -11,8 +11,11 @@ export class StudentTypeOrmEntity {
   @PrimaryColumn('uuid')
   id: string;
 
-  @Column()
-  name: string;
+  @Column('varchar', { name: 'first_name' })
+  firstName: string;
+
+  @Column('varchar', { name: 'last_name' })
+  lastName: string;
 
   @Column()
   document: string;
@@ -22,6 +25,9 @@ export class StudentTypeOrmEntity {
 
   @Column()
   code: string;
+
+  @Column('uuid', { name: 'user_id' })
+  userId: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

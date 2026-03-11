@@ -17,6 +17,10 @@ export class RoleService {
     return this.roleRepository.findById(id);
   }
 
+  async findByName(name: string): Promise<Role | null> {
+    return this.roleRepository.findByName(name);
+  }
+
   async create(data: { name: string; permissions?: string[] }): Promise<Role> {
     const id = crypto.randomUUID();
     const role = new Role(id, data.name, data.permissions ?? []);

@@ -22,6 +22,11 @@ export class RoleTypeOrmRepository implements IRoleRepository {
     return row ? this.toDomain(row) : null;
   }
 
+  async findByName(name: string): Promise<Role | null> {
+    const row = await this.repo.findOne({ where: { name } });
+    return row ? this.toDomain(row) : null;
+  }
+
   async save(role: Role): Promise<Role> {
     const row = this.repo.create({
       id: role.id,
@@ -33,9 +38,13 @@ export class RoleTypeOrmRepository implements IRoleRepository {
   }
 
   private toDomain(row: RoleTypeOrmEntity): Role {
-    const permissions = row.permissions
-      ? row.permissions.split(',').filter(Boolean)
-      : [];
+    const raw: unknown = row.permissions;
+    const permissions: string[] =
+      typeof raw === 'string'
+        ? raw ? raw.split(',').filter(Boolean) : []
+        : Array.isArray(raw)
+          ? raw.filter((p): p is string => typeof p === 'string')
+          : [];
     return new Role(row.id, row.name, permissions);
   }
 }

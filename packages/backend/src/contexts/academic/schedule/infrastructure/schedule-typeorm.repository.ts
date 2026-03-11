@@ -25,7 +25,6 @@ export class ScheduleTypeOrmRepository implements IScheduleRepository {
   async save(schedule: Schedule): Promise<Schedule> {
     const row = this.repo.create({
       id: schedule.id,
-      studentId: schedule.studentId,
       courseId: schedule.courseId,
       slot: schedule.slot,
     });
@@ -34,6 +33,6 @@ export class ScheduleTypeOrmRepository implements IScheduleRepository {
   }
 
   private toDomain(row: ScheduleTypeOrmEntity): Schedule {
-    return new Schedule(row.id, row.studentId, row.courseId, row.slot);
+    return new Schedule(row.id, row.courseId, row.slot);
   }
 }

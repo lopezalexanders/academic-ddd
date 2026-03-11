@@ -25,9 +25,7 @@ export class SchedulesController {
   }
 
   @Post()
-  async create(
-    @Body() body: { studentId: string; courseId: string; slot: string },
-  ) {
+  async create(@Body() body: { courseId: string; slot: string }) {
     return this.scheduleService.create(body);
   }
 }

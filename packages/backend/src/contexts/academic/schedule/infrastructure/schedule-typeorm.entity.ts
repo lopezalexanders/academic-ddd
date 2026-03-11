@@ -11,9 +11,6 @@ export class ScheduleTypeOrmEntity {
   @PrimaryColumn('uuid')
   id: string;
 
-  @Column('uuid', { name: 'student_id' })
-  studentId: string;
-
   @Column('uuid', { name: 'course_id' })
   courseId: string;
 

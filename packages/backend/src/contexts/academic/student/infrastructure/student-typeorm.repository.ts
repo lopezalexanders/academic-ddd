@@ -29,22 +29,35 @@ export class StudentTypeOrmRepository implements IStudentRepository {
   async save(student: Student): Promise<Student> {
     const row = this.repo.create({
       id: student.id,
-      name: student.name,
+      firstName: student.firstName,
+      lastName: student.lastName,
       document: student.document,
       birthDate: student.birthDate,
       code: student.code,
+      userId: student.userId,
     });
     await this.repo.save(row);
     return student;
   }
 
+  async delete(id: string): Promise<void> {
+    await this.repo.delete(id);
+  }
+
+  async existsByCode(code: string): Promise<boolean> {
+    const count = await this.repo.count({ where: { code } });
+    return count > 0;
+  }
+
   private toDomain(row: StudentTypeOrmEntity): Student {
     return new Student(
       row.id,
-      row.name,
+      row.firstName,
+      row.lastName,
       row.document,
       row.birthDate,
       row.code,
+      row.userId,
     );
   }
 }

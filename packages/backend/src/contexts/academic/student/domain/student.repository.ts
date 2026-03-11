@@ -7,4 +7,6 @@ export interface IStudentRepository {
   findById(id: string): Promise<Student | null>;
   count(): Promise<number>;
   save(student: Student): Promise<Student>;
+  delete(id: string): Promise<void>;
+  existsByCode(code: string): Promise<boolean>;
 }

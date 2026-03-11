@@ -17,18 +17,9 @@ export class ScheduleService {
     return this.scheduleRepository.findById(id);
   }
 
-  async create(data: {
-    studentId: string;
-    courseId: string;
-    slot: string;
-  }): Promise<Schedule> {
+  async create(data: { courseId: string; slot: string }): Promise<Schedule> {
     const id = crypto.randomUUID();
-    const schedule = new Schedule(
-      id,
-      data.studentId,
-      data.courseId,
-      data.slot,
-    );
+    const schedule = new Schedule(id, data.courseId, data.slot);
     return this.scheduleRepository.save(schedule);
   }
 }

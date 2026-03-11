@@ -11,14 +11,17 @@ export class UserTypeOrmEntity {
   @PrimaryColumn('uuid')
   id: string;
 
+  @Column({ unique: true })
+  username: string;
+
   @Column()
   email: string;
 
-  @Column()
-  name: string;
-
-  @Column('uuid')
+  @Column('uuid', { name: 'role_id' })
   roleId: string;
+
+  @Column()
+  password: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

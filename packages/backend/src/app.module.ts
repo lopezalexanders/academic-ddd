@@ -15,7 +15,7 @@ import { ApiModule } from './apps/api/api.module';
         password: process.env.TYPEORM_PASSWORD ?? 'postgres',
         database: process.env.TYPEORM_DATABASE ?? 'academic',
         autoLoadEntities: true,
-        synchronize: true,
+        synchronize: false,
       }),
     }),
     ApiModule,

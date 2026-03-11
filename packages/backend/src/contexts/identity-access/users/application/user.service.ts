@@ -1,6 +1,9 @@
 import { Injectable, Inject } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 import { User } from '../domain/user.entity';
 import { IUserRepository, USER_REPOSITORY } from '../domain/user.repository';
+
+const SALT_ROUNDS = 12;
 
 @Injectable()
 export class UserService {
@@ -17,9 +20,47 @@ export class UserService {
     return this.userRepository.findById(id);
   }
 
-  async create(data: { email: string; name: string; roleId: string }): Promise<User> {
+  async create(data: {
+    username: string;
+    email: string;
+    roleId: string;
+    password: string;
+  }): Promise<User> {
     const id = crypto.randomUUID();
-    const user = new User(id, data.email, data.name, data.roleId);
+    const password = await bcrypt.hash(data.password, SALT_ROUNDS);
+    const user = new User(
+      id,
+      data.username.toLowerCase(),
+      data.email,
+      data.roleId,
+      password,
+    );
     return this.userRepository.save(user);
+  }
+
+  async findByUsername(username: string): Promise<User | null> {
+    return this.userRepository.findByUsername(username);
+  }
+
+  async verifyPassword(plainPassword: string, hash: string): Promise<boolean> {
+    return bcrypt.compare(plainPassword, hash);
+  }
+
+  async updateEmail(userId: string, email: string): Promise<User | null> {
+    const user = await this.userRepository.findById(userId);
+    if (!user) return null;
+    const updated = new User(
+      user.id,
+      user.username,
+      email.trim(),
+      user.roleId,
+      user.password,
+    );
+    await this.userRepository.save(updated);
+    return updated;
+  }
+
+  async delete(userId: string): Promise<void> {
+    await this.userRepository.delete(userId);
   }
 }

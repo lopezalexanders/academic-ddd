@@ -25,8 +25,8 @@ export class AuthController {
     const isProd = process.env.NODE_ENV === 'production';
     res.cookie(JWT_COOKIE_NAME, result.access_token, {
       httpOnly: true,
-      secure: isProd,
-      sameSite: isProd ? 'lax' : 'none',
+      secure: isProd ? true : false,
+      sameSite: isProd ? 'lax' : 'lax',
       domain: COOKIE_DOMAIN,
       path: '/',
       maxAge: 2 * 60 * 60 * 1000, // 2h (match with JWT signOptions)

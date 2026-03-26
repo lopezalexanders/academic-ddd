@@ -32,8 +32,11 @@ import { ApiModule } from './apps/api/api.module';
         database: process.env.TYPEORM_DATABASE ?? 'academic',
         autoLoadEntities: true,
         synchronize: false,
-        ssl: {
-          rejectUnauthorized: false,
+        ssl: true,
+        extra: {
+          ssl: {
+            rejectUnauthorized: false,
+          },
         },
       }),
     }),

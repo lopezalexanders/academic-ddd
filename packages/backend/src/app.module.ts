@@ -45,7 +45,7 @@ import { ApiModule } from './apps/api/api.module';
             rejectUnauthorized: false,
           },
         },
-        logging: true,
+        logging: ['query', 'error','migration'],
       }),
     }),
     ApiModule,

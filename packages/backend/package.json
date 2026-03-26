@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "nest build",
-    "typeorm:prod": "typeorm-ts-node-commonjs -d ./dist/contexts/shared/infrastructure/persistence/typeorm/data-source.js",
+    "typeorm:prod": "typeorm-ts-node-commonjs -d dist/contexts/shared/infrastructure/persistence/typeorm/data-source.js",
     "migrations:run:prod": "npm run typeorm:prod -- migration:run",
     "start:prod": "npm run migrations:run:prod && node dist/main.js",
     "start": "nest start",

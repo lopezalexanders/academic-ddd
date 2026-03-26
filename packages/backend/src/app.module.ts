@@ -34,7 +34,7 @@ import { ApiModule } from './apps/api/api.module';
         database: process.env.TYPEORM_DATABASE ?? 'academic',
         }),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        migrations: [__dirname + '/migrations/*{.ts,.js}'],
+        migrations: [__dirname + '/../migrations/*{.ts,.js}'],
         migrationsTableName: 'migrations',
         autoLoadEntities: true,
         synchronize: false,

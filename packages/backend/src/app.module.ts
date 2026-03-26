@@ -24,6 +24,7 @@ import { ApiModule } from './apps/api/api.module';
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
         type: 'postgres',
+        url: process.env.DATABASE_URL,
         host: process.env.TYPEORM_HOST ?? 'localhost',
         port: parseInt(process.env.TYPEORM_PORT ?? '5432', 10),
         username: process.env.TYPEORM_USERNAME ?? 'postgres',
@@ -31,6 +32,9 @@ import { ApiModule } from './apps/api/api.module';
         database: process.env.TYPEORM_DATABASE ?? 'academic',
         autoLoadEntities: true,
         synchronize: false,
+        ssl: {
+          rejectUnauthorized: false,
+        },
       }),
     }),
     ApiModule,

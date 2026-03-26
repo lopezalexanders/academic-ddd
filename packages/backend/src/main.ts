@@ -22,7 +22,12 @@ async function bootstrap() {
     }),
   );
   app.enableCors({
-    origin: process.env.CORS_ORIGIN?.split(',').map((o) => o.trim()) ?? true,
+    //origin: process.env.CORS_ORIGIN?.split(',').map((o) => o.trim()) ?? true,
+    origin:[
+      'https://academic-ddd-git-main-lopezalexanders-projects.vercel.app', // Tu URL de Vercel
+      'http://localhost:3000', // Para que sigas pudiendo probar en local
+    ],
+    methods:'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
   await app.listen(process.env.PORT ?? 3000);

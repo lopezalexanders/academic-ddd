@@ -5,6 +5,7 @@ config({ path: process.cwd() + '/.env' });
 
 const AppDataSource = new DataSource({
   type: 'postgres',
+  url: process.env.DATABASE_URL,
   host: process.env.TYPEORM_HOST ?? 'localhost',
   port: parseInt(process.env.TYPEORM_PORT ?? '5432', 10),
   username: process.env.TYPEORM_USERNAME ?? 'postgres',
@@ -12,7 +13,7 @@ const AppDataSource = new DataSource({
   database: process.env.TYPEORM_DATABASE ?? 'academic',
   migrations: [__dirname + '/migrations/*{.ts,.js}'],
   migrationsTableName: 'migrations',
-  synchronize: false,
+  synchronize: true,
 });
 
 export default AppDataSource;

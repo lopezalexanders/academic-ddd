@@ -37,7 +37,7 @@ import { ApiModule } from './apps/api/api.module';
         migrations: [__dirname + '/migrations/*{.ts,.js}'],
         migrationsTableName: 'migrations',
         autoLoadEntities: true,
-        synchronize: false,
+        synchronize: true,
         ssl: process.env.DATABASE_URL ? true : false,
         extra: {
           ssl: {

@@ -30,7 +30,7 @@ async function bootstrap() {
       'http://localhost:3000', // Para que sigas pudiendo probar en local
     ],
     methods:'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    allowedHeaders:'Content-Type, Accept, Authorization',
+    allowedHeaders:'*',
     credentials: true,
   });
   await app.listen(process.env.PORT ?? 3000, '0.0.0.0');

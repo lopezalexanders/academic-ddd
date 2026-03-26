@@ -26,12 +26,13 @@ async function bootstrap() {
     origin:[
       'https://academic-ddd-alexanders.vercel.app', // Tu URL de Vercel
       'https://academic-ddd-git-main-lopezalexanders-projects.vercel.app', // Tu URL de Vercel
+      /\.vercel\.app$/,
       'http://localhost:3000', // Para que sigas pudiendo probar en local
     ],
     methods:'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     allowedHeaders:'Content-Type, Accept, Authorization',
     credentials: true,
   });
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 3000, '0.0.0.0');
 }
 bootstrap();

@@ -38,12 +38,13 @@ import { ApiModule } from './apps/api/api.module';
         migrationsTableName: 'migrations',
         autoLoadEntities: true,
         synchronize: false,
-        ssl: true,
+        ssl: process.env.DATABASE_URL ? true : false,
         extra: {
           ssl: {
             rejectUnauthorized: false,
           },
         },
+        logging: true,
       }),
     }),
     ApiModule,

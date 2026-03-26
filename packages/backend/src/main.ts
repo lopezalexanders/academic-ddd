@@ -24,10 +24,12 @@ async function bootstrap() {
   app.enableCors({
     //origin: process.env.CORS_ORIGIN?.split(',').map((o) => o.trim()) ?? true,
     origin:[
+      'https://academic-ddd-alexanders.vercel.app', // Tu URL de Vercel
       'https://academic-ddd-git-main-lopezalexanders-projects.vercel.app', // Tu URL de Vercel
       'http://localhost:3000', // Para que sigas pudiendo probar en local
     ],
-    methods:'GET,HEAD,PUT,PATCH,POST,DELETE',
+    methods:'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders:'Content-Type, Accept, Authorization',
     credentials: true,
   });
   await app.listen(process.env.PORT ?? 3000);

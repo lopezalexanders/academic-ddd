@@ -6,16 +6,20 @@ config({ path: process.cwd() + '/.env' });
 const AppDataSource = new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL,
+
+  ...(!process.env.DATABASE_URL && {
   host: process.env.TYPEORM_HOST ?? 'localhost',
   port: parseInt(process.env.TYPEORM_PORT ?? '5432', 10),
   username: process.env.TYPEORM_USERNAME ?? 'postgres',
   password: process.env.TYPEORM_PASSWORD ?? 'postgres',
   database: process.env.TYPEORM_DATABASE ?? 'academic',
+  }),
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
   migrations: [__dirname + '/migrations/*{.ts,.js}'],
   migrationsTableName: 'migrations',
   synchronize: false,
   ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
+  logging: true
 });
 
 export default AppDataSource;

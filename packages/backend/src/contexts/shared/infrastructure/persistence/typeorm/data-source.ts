@@ -11,9 +11,11 @@ const AppDataSource = new DataSource({
   username: process.env.TYPEORM_USERNAME ?? 'postgres',
   password: process.env.TYPEORM_PASSWORD ?? 'postgres',
   database: process.env.TYPEORM_DATABASE ?? 'academic',
+  entities: [__dirname + '/../**/*.entity{.ts,.js}'],
   migrations: [__dirname + '/migrations/*{.ts,.js}'],
   migrationsTableName: 'migrations',
   synchronize: true,
+  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
 });
 
 export default AppDataSource;

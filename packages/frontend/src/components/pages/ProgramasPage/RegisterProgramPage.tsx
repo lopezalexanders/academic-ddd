@@ -11,7 +11,7 @@ export function RegisterProgramPage() {
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
   const [creditsRequired, setCreditsRequired] = useState("");
-  const [departamentId, setDepartamentId] = useState("");
+  const [department_Id, setDepartamentId] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -24,7 +24,7 @@ export function RegisterProgramPage() {
         code: code.trim(),
         name: name.trim(),
         credits_required: Number(creditsRequired),
-        departament_id: departamentId.trim(),
+        department_id: department_Id.trim(),
       });
       navigate("/programas", {state: {registered: true}});
     } catch (error) {
@@ -84,9 +84,9 @@ export function RegisterProgramPage() {
                 ID del departamento
               </label>
               <Input
-                id="departamentId"
-                name="departamentId"
-                value={departamentId}
+                id="department_Id"
+                name="department_Id"
+                value={department_Id}
                 onChange={(e) => setDepartamentId(e.target.value)}
               />
             </div>

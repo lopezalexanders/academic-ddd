@@ -25,7 +25,7 @@ export function EditProgramPage() {
         setCode(data.code);
         setName(data.name);
         setCreditsRequired(data.credits_required);
-        setDepartamentId(data.departament_id);
+        setDepartamentId(data.department_id);
         setLoading(false);
       } catch (error) {
         setError('Error fetching program data');
@@ -46,7 +46,7 @@ export function EditProgramPage() {
         code: code.trim(),
         name: name.trim(),
         credits_required: credits_required,
-        departament_id: departament_id.trim()
+        department_id: departament_id.trim()
       });
       navigate('/programas/', { state: { updated: true } });
     } catch (error) {
